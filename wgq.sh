@@ -6,12 +6,6 @@
 # Already connected interfaces
 connected=$(wg show interfaces)
 
-# Turn off prev interface (We are assuming there's just one)
-if [[ -n "$connected" ]]; then
-	wg-quick down $connected
-	printf "\n$connected is disconnected\n\n"
-fi
-
 # Existing configs
 configs=$(ls /etc/wireguard)
 config_list=()
@@ -23,6 +17,17 @@ done <<<"$configs"
 
 # Select using fzf
 selected=$(printf "%s\n" "${config_list[@]}" | sort | fzf --tmux)
+
+# Handle empty selection (Nothing happens)
+if [[ -z "$selected" ]]; then
+	exit 0
+fi
+
+# Turn off prev interface (We are assuming there's just one)
+if [[ -n "$connected" ]]; then
+	wg-quick down $connected
+	printf "\n$connected is disconnected\n\n"
+fi
 
 # Connect
 wg-quick up "$selected"
