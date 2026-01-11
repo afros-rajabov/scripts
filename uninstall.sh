@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# TODO: Script for uninstalling all the scripts
+# NOTE: Script for uninstalling all the scripts
 
 WHERE=~/.local/bin
 
