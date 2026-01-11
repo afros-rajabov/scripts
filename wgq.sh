@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# NOTE: Script for switching wireguard inerfaces
+# NOTE: Script for switching wireguard interfaces
 # Requirements: wg, wg-quick, fzf
 
 # Already connected interfaces
